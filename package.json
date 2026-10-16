@@ -1,0 +1,10 @@
+{
+  "name": "pi-skills",
+  "version": "0.1.0",
+  "description": "Personal Pi skills: a house development workflow for Python, TypeScript/JavaScript, Vue 3 and Rust.",
+  "license": "MIT",
+  "keywords": ["pi-package", "pi", "skills"],
+  "pi": {
+    "skills": ["./skills"]
+  }
+}
