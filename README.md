@@ -32,9 +32,9 @@ task needs them**, so a Python task never pays for the Rust rules:
 ## Install
 
 ```bash
-pi install git:github.com/<owner>/pi-skills          # latest
-pi install git:github.com/<owner>/pi-skills@v1       # pinned to a tag
-pi install ./pi-skills                               # local checkout
+pi install git:github.com/giulio-giordano/pi-skills      # latest
+pi install git:github.com/giulio-giordano/pi-skills@v0.1.0  # pinned
+pi install ./pi-skills                                   # local checkout
 ```
 
 Then run `/reload` in a running session. Force the skill with
@@ -42,6 +42,36 @@ Then run `/reload` in a running session. Force the skill with
 
 > Installing from git **and** keeping a local checkout registered will register
 > the skill twice (Pi keeps the first one and warns). Use one source at a time.
+
+### This checkout as the working copy
+
+On this machine the repository itself is the registered source, so it is the
+single source of truth for **every** project: edit `SKILL.md` or a reference file
+here and the next session (or `/reload`) picks the change up - nothing has to be
+copied or re-installed.
+
+```bash
+pi install /home/giuliogiordano/workspace/pi-skills   # absolute path
+pi list                                               # -> ../../workspace/pi-skills
+```
+
+Pi records the path relative to `~/.pi/agent/settings.json`
+(`../../workspace/pi-skills`) and loads the files from the resolved path
+**without copying** them, so a git checkout is never needed for editing.
+
+A symlink under `~/.agents/skills/` is therefore unnecessary and was removed:
+pointing a user skill and a package at the same skill name is a collision, and
+Pi only keeps the first one.
+
+Verify that Pi discovers the skill (expects `1`):
+
+```bash
+pi -p "Elenca solo i nomi delle skill nel tuo system prompt, uno per riga." \
+  | grep -c dev-workflow
+```
+
+Because the install is at user level (not `.pi/settings.json` of a project), the
+skill is active in every project, including new ones.
 
 ## Layout
 

@@ -16,3 +16,8 @@
 - 10:41 - Set the repository commit identity to
   `Giulio Giordano <giuliogiordano95@gmail.com>` (local config only, the global
   one stays on the work address).
+- 10:44 - Tagged `v0.1.0` for the first installable version.
+- 10:44 - Registered this checkout as the user-level Pi package
+  (`pi install ~/workspace/pi-skills`), so it is the single source of truth for
+  every project and edits need no copying; removed the
+  `~/.agents/skills/dev-workflow` symlink to avoid a double registration.
